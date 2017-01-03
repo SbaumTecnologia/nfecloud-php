@@ -1,0 +1,27 @@
+{
+    "name": "sbaum-tecnologia/nfecloud-php",
+    "description": "SDK nfecloud para PHP.",
+    "keywords": [
+        "nfecloud",
+        "nfecloud-php",
+        "nfecloud-php-sdk"
+    ],
+    "homepage": "https://github.com/nfecloud/nfecloud-php",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Sbaum Tecnologia",
+            "email": "suporte@sbaum.com.br",
+            "homepage": "https://www.sbaum.com.br/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "guzzlehttp/guzzle": "^6.0"
+    },    
+    "autoload": {
+        "psr-4": {
+            "NFeCloud\\": "src"
+        }
+    }
+}
