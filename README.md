@@ -1,28 +1,21 @@
-![alt text align:center](https://www.vindi.com.br/image/vindi-logo-transparente.png "Vindi")
+![alt text align:center](https://www.sbaum.com.br/images/logo-mini.png "Sbaum")
 
-# Vindi - SDK PHP
+# NFeCloud - SDK PHP
 
-[![Última Versão no Packagist][ico-version]][link-packagist]
-[![Licença do Software][ico-license]](license.txt)
-[![Status de Build][ico-travis]][link-travis]
-[![Status de Coverage][ico-scrutinizer]][link-scrutinizer]
-[![Nota de Qualidade][ico-code-quality]][link-code-quality]
-[![Downloads no Total][ico-downloads]][link-downloads]
 
 ## Descrição
-Este pacote consiste em um SDK em PHP para a [API de Recorrência][link-introducao-api] da [Vindi][link-vindi].
+Este pacote consiste em um SDK em PHP para a utilizacao do sistema NFeCLoud através de api - REST.
 
 # Requisitos
 - PHP >=5.5.19;
-- Certificado digital HTTPS assinado por uma entidade certificadora;
-- Conta ativa na [Vindi](https://www.vindi.com.br "Vindi").
+
 
 # Instalação
 
 Via Composer
 
 ```bash
-composer require vindi/vindi-php
+composer require SbaumTecnologia/nfecloud-php
 ```
 
 ### Teste
