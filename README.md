@@ -25,11 +25,14 @@ GNU GPLv3. Por favor, veja o [Arquivo de Licença](license.txt) para mais inform
 require __DIR__.'/../vendor/autoload.php';
 
 // Coloca o Token NFECLOUD  no environment do PHP.
+
 putenv('NFECLOUD_TOKEN=AAAA');
 putenv('NFECLOUD_TOKEN_SECRET=aBBBCC');
+
 /*
  * Cria Objetos de Consulta/Servico
  */
+
 $ServiceEmpresas = new NFeCloud\Empresas();
 $ServiceNotas = new NFeCloud\Notas();
 $ServiceActions = new NFeCloud\Actions();
@@ -43,6 +46,7 @@ $ServiceActions = new NFeCloud\Actions();
  * 
  *  retorno: array com ids encontrados
  */
+
 try {        
     
     $ret = $ServiceEmpresas->all(['order'=>'cnpj desc','limit'=>10,'page'=>1,'filtros'=>[['id','=','107']]]);    
@@ -96,6 +100,7 @@ try {
                 echo "----</br>";
          }
     }
+    
     /*
      * Consulta novos documentos (DFE) emitidas para a empresa
      * DFE - Resumos de Notas // XML - arquivos xml // Eventos - Eventos vinculados 
