@@ -4,15 +4,13 @@ namespace NFeCloud;
 
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\ClientException;
-use Vindi\Exceptions\ValidationException;
-use Vindi\Http\Client;
-use Vindi\Exceptions\RequestException;
-use Vindi\Exceptions\RateLimitException;
+use NFeCloud\Http\Client;
+
 
 class ApiRequester
 {
     /**
-     * @var \Vindi\Http\Client
+     * @var \NFeCloud\Http\Client
      */
     public $client;
 
@@ -47,9 +45,10 @@ class ApiRequester
         try {
             $response = $this->client->request($method, $endpoint, $options);
         } catch (ClientException $e) {
+            
             $response = $e->getResponse();
         }
-
+        
         return $this->response($response);
     }
 
@@ -63,55 +62,14 @@ class ApiRequester
         $this->lastResponse = $response;
 
         $content = $response->getBody()->getContents();
-
-        $decoded = json_decode($content); // parse as object
-        reset($decoded);
-        $data = current($decoded); // get first attribute from array, e.g.: subscription, subscriptions, errors.
-
-        $this->checkRateLimit($response)
-            ->checkForErrors($response, $data);
-
-        return $data;
+        
+        $data = json_decode($content); // parse as object
+        
+        if($data->status=="fail"){
+            throw new \Exception($data->message);
+        }        
+        
+        return $data->message;
     }
 
-    /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @return $this
-     * @throws \Vindi\Exceptions\RateLimitException
-     */
-    private function checkRateLimit(ResponseInterface $response)
-    {
-        if (429 === $response->getStatusCode())
-            throw new RateLimitException($response);
-
-        return $this;
-    }
-
-    /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param mixed                     $data
-     *
-     * @return $this
-     * @throws \Vindi\Exceptions\RequestException
-     */
-    private function checkForErrors(ResponseInterface $response, $data)
-    {
-        $status = $response->getStatusCode();
-
-        $data = (array) $data;
-
-        $statusClass = (int) ($status / 100);
-
-        if (($statusClass === 4) || ($statusClass === 5)) {
-            switch ($status) {
-                case 422:
-                    throw new ValidationException($status, $data, $this->lastOptions);
-                default:
-                    throw new RequestException($status, $data, $this->lastOptions);
-            }
-        }
-
-        return $this;
-    }
 }

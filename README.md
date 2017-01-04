@@ -15,27 +15,101 @@ Este pacote consiste em um SDK em PHP para a utilizacao do sistema NFeCLoud atra
 Via Composer
 
 ```bash
-composer require SbaumTecnologia/nfecloud-php
+composer require sbaum-tecnologia/nfecloud-php
 ```
 
 ## Licença
 GNU GPLv3. Por favor, veja o [Arquivo de Licença](license.txt) para mais informações.
 
-[ico-version]: https://img.shields.io/packagist/v/vindi/vindi-php.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/vindi/vindi-php/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/vindi/vindi-php.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/vindi/vindi-php.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/vindi/vindi-php.svg?style=flat-square
+## Exemplo
+require __DIR__.'/../vendor/autoload.php';
 
-[link-packagist]: https://packagist.org/packages/vindi/vindi-php
-[link-travis]: https://travis-ci.org/vindi/vindi-php
-[link-scrutinizer]: https://scrutinizer-ci.com/g/vindi/vindi-php/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/vindi/vindi-php
-[link-downloads]: https://packagist.org/packages/vindi/vindi-php
-[link-author]: https://github.com/vindi
-[link-contributors]: ../../contributors
-[link-vindi]: https://www.vindi.com.br
-[link-introducao-api]: http://atendimento.vindi.com.br/hc/pt-br/articles/203020644-Introdu%C3%A7%C3%A3o-%C3%A0-API-de-Recorr%C3%AAncia
-[link-webhooks]: http://atendimento.vindi.com.br/hc/pt-br/articles/203305800-Webhooks
-[link-swagger]: http://vindi.github.io/api-docs/dist/
+// Coloca o Token NFECLOUD  no environment do PHP.
+putenv('NFECLOUD_TOKEN=AAAA');
+putenv('NFECLOUD_TOKEN_SECRET=aBBBCC');
+/*
+ * Cria Objetos de Consulta/Servico
+ */
+$ServiceEmpresas = new NFeCloud\Empresas();
+$ServiceNotas = new NFeCloud\Notas();
+$ServiceActions = new NFeCloud\Actions();
+
+/*
+ * Obtem Todas as Empresas vinculadas a conta 
+ * 'order' => ordena pelo atributo especificadp [asc=>ascendente, desc=>descendente]
+ * 'limit' => qual o numero de elementos deve buscas (máximo 100)
+ * 'page' => qual a página ( para mostrar do elemento 201 ao 300 busque pela página 3)
+ * 'filtros' => array de condicões para pesquisa no formato: array('atributo',criteria('=','>=','<=','>','<','like,'IN'),'valor')
+ * 
+ *  retorno: array com ids encontrados
+ */
+try {        
+    
+    $ret = $ServiceEmpresas->all(['order'=>'cnpj desc','limit'=>10,'page'=>1,'filtros'=>[['id','=','107']]]);    
+    foreach ($ret->ids as $id){
+        /*
+         * Busca a empresa pelo id
+         */
+        $_ret = $ServiceEmpresas->get($id);
+        echo "CNPJ: " . $_ret->cnpj . "</br>";
+        echo "ID: " . $_ret->id . "</br>";
+        /*
+         * busca as notas que pertence a empresa
+         */
+        
+        /*
+         * Para buscas pelo nsu - numero sequencial para cada emissor gerado pela Sefaz - formatar conforme exemplo
+         */
+        $value = 7200;
+        $nsu = str_pad($value, 15, '0', STR_PAD_LEFT);        
+        
+        
+        $retN = $ServiceNotas->all(['order'=>'dhEmi desc','limit'=>2,'page'=>1,'filtros'=>[['empresas_id','=',$_ret->id],['nsu','>=',$nsu],['xml_arquivado','=',1]]]);        
+        foreach ($retN->ids as $id){
+                /*
+                 * Busca a nota pelo id
+                 * o atributo xml retorna em base64
+                 */
+                $_retN = $ServiceNotas->get($id);
+                echo "----</br>";
+                echo "ID: " . $_retN->id . "</br>";
+                echo "Numero: " . $_retN->numero . "</br>";
+                echo "Emissao: " . $_retN->dhEmi . "</br>";
+                echo "Emitente/Destinatario: " . $_retN->xNome . "</br>";
+                //echo "xml: " . base64_decode($_retN->xml) . "</br>";
+                /*
+                 * Consulta Status da NF-e - parametro id da nota
+                 */
+                $ret_Consulta = $ServiceActions->consultarStatusNFE((int)$_retN->id) ;
+                echo $ret_Consulta . "</br>";
+                /*
+                 * Faz a manifestação da NF-e - parametro id da nota, tipo de manifestação, jusitificativa
+                 */
+                $ret_Consulta =  $ServiceActions->manifestarNFE((int)$_retN->id, '210210', '');
+                echo $ret_Consulta . "</br>";
+                echo "----</br>";
+                /*
+                 * Faz download do xml e/ou pdf - parametro id da nota, xml (true/false), pdf (true/false)
+                 */
+                $ret_Consulta =  $ServiceActions->downloadXMLPDF((int)$_retN->id, true,true);                
+                print_r($ret_Consulta) . "</br>";
+                echo "----</br>";
+         }
+    }
+    /*
+     * Consulta novos documentos (DFE) emitidas para a empresa
+     * DFE - Resumos de Notas // XML - arquivos xml // Eventos - Eventos vinculados 
+     */
+    $ret_Consulta =  $ServiceActions->consultarDFeSefaz((int)'107');
+    print_r($ret_Consulta);
+    /*
+     * Upload de arquivos xml (NF-e/NFC-e/CT-e/NFS-e/Eventos)
+     */    
+    $conteudo = file_get_contents(__DIR__.'/41170107464573000115550010000060971776089318nfe.xml');
+    $xml = base64_encode($conteudo);
+    $ret_upl = $ServiceActions->uploadXML($xml);
+    echo $ret_upl;
+    echo '--Fim--';
+} catch (Exception $e) {
+    echo $e->getMessage();    
+}

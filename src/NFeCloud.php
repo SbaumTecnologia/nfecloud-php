@@ -8,7 +8,7 @@ class NFeCloud
      * This Package SDK Version.
      * @var string
      */
-    public static $sdkVersion = '1.0.1';
+    public static $sdkVersion = '1.0.0';
 
     /**
      * The base URL for the NFeCloud API.
@@ -20,14 +20,16 @@ class NFeCloud
      * The Environment variable name for API Key.
      * @var string
      */
-    public static $apiKeyEnvVar = 'NFECLOUD_API_KEY';
+    public static $tokenEnvVar = 'NFECLOUD_TOKEN';
+    public static $tokenSecretEnvVar = 'NFECLOUD_TOKEN_SECRET';
 
     /**
      * Get Vindi API Key from environment.
      * @return string
      */
-    public function getApiKey()
-    {
-        return getenv(static::$apiKeyEnvVar);
+    public static function getToken()
+    {   
+        return['token_id'=>getenv(static::$tokenEnvVar),'token_secret'=>getenv(static::$tokenSecretEnvVar)];
+        
     }    
 }

@@ -17,11 +17,10 @@ class Client extends Guzzle
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 
         $config = array_merge([
-            'base_uri'        => NFeCloud::$apiBase,
-            'auth'            => [$vindi->getApiKey(), '', 'BASIC'],
+            'base_uri'        => NFeCloud::$apiBase,            
             'headers' => [
                 'Content-Type' => 'application/json',
-                'User-Agent'   => trim('Vindi-PHP/' . NFeCloud::$sdkVersion . "; {$host}"),
+                'User-Agent'   => trim('NFeCloud-PHP/' . NFeCloud::$sdkVersion . "; {$host}"),
             ],
             'timeout' => 60,            
         ], $config);

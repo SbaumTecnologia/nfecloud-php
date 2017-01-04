@@ -1,4 +1,4 @@
-<?php namespace Vindi\Exceptions;
+<?php namespace NFeCloud\Exceptions;
 
 use Exception;
 
