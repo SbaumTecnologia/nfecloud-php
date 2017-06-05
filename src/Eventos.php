@@ -1,6 +1,6 @@
 <?php
 
-namespace NFeCloud;
+namespace SNFe;
 
 class Eventos extends Resource
 {

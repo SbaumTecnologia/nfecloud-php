@@ -1,9 +1,9 @@
 <?php 
 
-namespace NFeCloud\Http;
+namespace SNFe\Http;
 
 use GuzzleHttp\Client as Guzzle;
-use NFeCloud\NFeCloud;
+use SNFe\SNFe;
 
 class Client extends Guzzle
 {
@@ -12,15 +12,15 @@ class Client extends Guzzle
      */
     public function __construct(array $config = [])
     {
-        $nfecloud = new NFeCloud();
+        $nfecloud = new SNFe();
 
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 
         $config = array_merge([
-            'base_uri'        => NFeCloud::$apiBase,            
+            'base_uri'        => SNFe::$apiBase,            
             'headers' => [
                 'Content-Type' => 'application/json',
-                'User-Agent'   => trim('NFeCloud-PHP/' . NFeCloud::$sdkVersion . "; {$host}"),
+                'User-Agent'   => trim('SNFe-PHP/' . SNFe::$sdkVersion . "; {$host}"),
             ],
             'timeout' => 60,            
         ], $config);

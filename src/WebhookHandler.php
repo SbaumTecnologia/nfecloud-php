@@ -2,7 +2,7 @@
 
 namespace Vindi;
 
-use Vindi\Exceptions\WebhookHandleException;
+use SNFe\Exceptions\WebhookHandleException;
 
 class WebhookHandler
 {
@@ -10,11 +10,7 @@ class WebhookHandler
      * @var string
      */
     public $file = 'php://input';
-
-    /**
-     * @return mixed
-     * @throws \Vindi\Exceptions\WebhookHandleException
-     */
+    
     public function handle()
     {
         try {

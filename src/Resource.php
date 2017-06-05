@@ -1,10 +1,10 @@
 <?php
-namespace NFeCloud;
+namespace SNFe;
 
 abstract class Resource
 {
     /**
-     * @var \NFeCloud\ApiRequester
+     * @var \SNFe\ApiRequester
      */
     public $apiRequester;
     private $msg_NoAvaliable = 'Metodo não implementado/Disponível para este recurso!!';
@@ -49,7 +49,7 @@ abstract class Resource
      */
     public function all(array $params = [])    
     {   
-        foreach (NFeCloud::getToken() as $key=>$value){
+        foreach (SNFe::getToken() as $key=>$value){
             $params[$key] = $value;     
         }
         return $this->apiRequester->request('GET', $this->url(), ['query' => $params]);
@@ -64,7 +64,7 @@ abstract class Resource
      */
     public function create(array $form_params = [])
     {
-        foreach (NFeCloud::getToken() as $key=>$value){
+        foreach (SNFe::getToken() as $key=>$value){
             $form_params[$key] = $value;
         }
         return $this->apiRequester->request('POST', $this->url(), ['json' => $form_params]);
@@ -90,7 +90,7 @@ abstract class Resource
      */
     public function update($id = null, array $form_params = [])
     {
-        foreach (NFeCloud::getToken() as $key=>$value){
+        foreach (SNFe::getToken() as $key=>$value){
             $form_params[$key] = $value;
         }
         return $this->apiRequester->request('PUT', $this->url($id), ['json' => $form_params]);
@@ -117,7 +117,7 @@ abstract class Resource
      */
     public function get($id = null, $additionalEndpoint = null,array $params = [])
     {
-        foreach (NFeCloud::getToken() as $key=>$value){
+        foreach (SNFe::getToken() as $key=>$value){
             $params[$key] = $value;     
         }
         return $this->apiRequester->request('GET', $this->url($id, $additionalEndpoint),['query' => $params]);
@@ -133,7 +133,7 @@ abstract class Resource
      */
     public function post($id = null, $additionalEndpoint = null, array $form_params = [])
     {
-        foreach (NFeCloud::getToken() as $key=>$value){
+        foreach (SNFe::getToken() as $key=>$value){
             $form_params[$key] = $value;
         }
         return $this->apiRequester->request('POST', $this->url($id, $additionalEndpoint), ['json' => $form_params]);

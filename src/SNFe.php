@@ -1,8 +1,8 @@
 <?php
 
-namespace NFeCloud;
+namespace SNFe;
 
-class NFeCloud
+class SNFe
 {
     /**
      * This Package SDK Version.
@@ -14,14 +14,14 @@ class NFeCloud
      * The base URL for the NFeCloud API.
      * @var string
      */
-    public static $apiBase = 'https://nfecloud.sbaum.com.br/v1/';
+    public static $apiBase = 'https://app.snfe.com.br/v1/';
 
     /**
      * The Environment variable name for API Key.
      * @var string
      */
-    public static $tokenEnvVar = 'NFECLOUD_TOKEN';
-    public static $tokenSecretEnvVar = 'NFECLOUD_TOKEN_SECRET';
+    public static $tokenEnvVar = 'SNFE_TOKEN';
+    public static $tokenSecretEnvVar = 'SNFE_TOKEN_SECRET';
 
     /**
      * Get Vindi API Key from environment.

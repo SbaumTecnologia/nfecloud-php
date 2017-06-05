@@ -1,4 +1,4 @@
-<?php namespace NFeCloud\Exceptions;
+<?php namespace SNFe\Exceptions;
 
 use Exception;
 

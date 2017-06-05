@@ -1,10 +1,10 @@
 <?php
 
-namespace NFeCloud;
+namespace SNFe;
 
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\ClientException;
-use NFeCloud\Http\Client;
+use SNFe\Http\Client;
 
 
 class ApiRequester
@@ -63,13 +63,13 @@ class ApiRequester
 
         $content = $response->getBody()->getContents();
         
-        $data = json_decode($content); // parse as object
-        
-        if($data->status=="fail"){
+        //$data = json_decode($content); // parse as object        
+        $data = json_decode($content); // parse as object        
+        if(property_exists ($data , "status" ) && $data->status=="fail"){            
             throw new \Exception($data->message);
         }        
         
-        return $data->message;
+        return $data;
     }
 
 }
