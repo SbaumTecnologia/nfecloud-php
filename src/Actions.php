@@ -138,6 +138,10 @@ class Actions extends Resource
         }
         return parent::post(null,'downloadXMLPDF',$data);        
     }
+
+    public function criarNota($data){
+        return parent::post(null,'invoiceCreate',$data);
+    }
     
     
 }
