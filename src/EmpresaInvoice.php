@@ -2,7 +2,7 @@
 
 namespace SNFe;
 
-class EmpresasInvoice extends Resource
+class EmpresaInvoice extends Resource
 {
     /**
      * The endpoint that will hit the API.
