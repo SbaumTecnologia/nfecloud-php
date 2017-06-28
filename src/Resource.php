@@ -76,9 +76,14 @@ abstract class Resource
      *
      * @return mixed
      */
-    public function retrieve($id = null)
-    {
-        return $this->apiRequester->request('GET', $this->url($id));
+    public function retrieve($id)
+   
+    {   
+        foreach (SNFe::getToken() as $key=>$value){
+            $params[$key] = $value;
+        }
+        return $this->apiRequester->request('GET', $this->url($id), ['query' => $params]);
+        
     }
     /**
      * Update a specific resource.
