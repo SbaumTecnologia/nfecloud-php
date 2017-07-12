@@ -143,5 +143,13 @@ class Actions extends Resource
         return parent::post(null,'invoiceCreate',$data);
     }
     
+    public function cancelarNota($data){
+        return parent::post(null,'invoiceCancel',$data);
+    }
+    
+    public function gerarCCe($data){
+        return parent::post(null,'invoiceCCe',$data);
+    }
+    
     
 }
