@@ -144,6 +144,23 @@ abstract class Resource
         return $this->apiRequester->request('POST', $this->url($id, $additionalEndpoint), ['json' => $form_params]);
     }
     /**
+     * Make a GET request to an additional endpoint for a specific resource.
+     *
+     * @param int    $id                 The resource's id.
+     * @param string $additionalEndpoint Additional endpoint that will be appended to the URL.
+     *
+     * @return mixed
+     */
+    public function anexos($id = null)
+    {
+        foreach (SNFe::getToken() as $key=>$value){
+            $params[$key] = $value;
+        }
+        $additionalEndpoint = 'anexos';
+        return $this->apiRequester->request('GET', $this->url($id, $additionalEndpoint),['query' => $params]);
+    }
+    
+    /**
      * Return the last response from a preview request
      *
      * @return mixed
