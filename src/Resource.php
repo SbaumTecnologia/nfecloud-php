@@ -110,6 +110,9 @@ abstract class Resource
      */
     public function delete($id = null, array $form_params = [])
     {
+        foreach (SNFe::getToken() as $key=>$value){
+            $form_params[$key] = $value;
+        }
         return $this->apiRequester->request('DELETE', $this->url($id), ['json' => $form_params]);
     }
     /**

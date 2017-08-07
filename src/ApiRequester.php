@@ -64,7 +64,7 @@ class ApiRequester
         $content = $response->getBody()->getContents();    
         //print_r($content);
         //exit;
-        //$data = json_decode($content); // parse as object        
+               
         $data = json_decode($content); // parse as object        
         if(property_exists ($data , "status" ) && $data->status=="fail"){            
             throw new \Exception($data->message);
