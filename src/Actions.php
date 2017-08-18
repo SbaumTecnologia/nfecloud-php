@@ -138,6 +138,28 @@ class Actions extends Resource
         }
         return parent::post(null,'downloadXMLPDF',$data);        
     }
+    
+    
+    public function createInvoiceDownload($params=array(),$xml=true,$pdf=true,$empresas_id=null){        
+        if(is_null($empresas_id)){
+            throw new \Exception('Informe a empresa');
+        }
+        $data = $params;
+        $data['empresas_id'] = $empresas_id;
+        $data['xml'] = '0';
+        $data['pdf'] = '0';
+        if($xml){
+            $data['xml'] = '1';
+        }
+        if($pdf){
+            $data['pdf'] = '1';
+        }        
+        return parent::post(null,'invoiceDownload',$data);
+    }
+    
+    
+    
+    
 
     public function criarNota($data){
         return parent::post(null,'invoiceCreate',$data);
