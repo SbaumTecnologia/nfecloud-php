@@ -12,7 +12,7 @@ class Client extends Guzzle
      */
     public function __construct(array $config = [])
     {
-        $nfecloud = new SNFe();
+        
 
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 
@@ -22,7 +22,7 @@ class Client extends Guzzle
                 'Content-Type' => 'application/json',
                 'User-Agent'   => trim('SNFe-PHP/' . SNFe::$sdkVersion . "; {$host}"),
             ],
-            'timeout' => 60,            
+            'timeout' => 280,            
         ], $config);
 
 

@@ -157,9 +157,6 @@ class Actions extends Resource
         return parent::post(null,'invoiceDownload',$data);
     }
     
-    
-    
-    
 
     public function criarNota($data){
         return parent::post(null,'invoiceCreate',$data);
@@ -173,5 +170,8 @@ class Actions extends Resource
         return parent::post(null,'invoiceCCe',$data);
     }
     
+    public function dashboard($data){
+        return parent::post(null,'dashboard',$data);
+    }
     
 }
