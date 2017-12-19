@@ -60,11 +60,10 @@ class ApiRequester
     public function response(ResponseInterface $response)
     {
         $this->lastResponse = $response;
-
-        $content = $response->getBody()->getContents();
+        $content = $response->getBody()->getContents();        
         $data = json_decode($content); // parse as object        
         if(property_exists ($data , "status" ) && $data->status=="fail"){            
-            throw new \Exception($data->message);
+            throw new \Exception("Erro da API (v1.0): " . $data->message);
         }        
         
         return $data;
