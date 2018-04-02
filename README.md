@@ -1,10 +1,10 @@
 ![alt text align:center](https://www.sbaum.com.br/images/logo-mini.png "Sbaum")
 
-# NFeCloud - SDK PHP
+# SNFe - SDK PHP
 
 
 ## Descrição
-Este pacote consiste em um SDK em PHP para a utilizacao do sistema NFeCLoud através de api - REST.
+Este pacote consiste em um SDK em PHP para a utilizacao do sistema SNFe através de api - REST.
 
 # Requisitos
 - PHP >=5.5.19;
@@ -25,7 +25,7 @@ GNU GPLv3. Por favor, veja o [Arquivo de Licença](license.txt) para mais inform
 ```php
 require __DIR__.'/../vendor/autoload.php';
 
-// Coloca o Token NFECLOUD  no environment do PHP.
+// Coloca o Token SNFe  no environment do PHP.
 
 putenv('NFECLOUD_TOKEN=AAAA');
 putenv('NFECLOUD_TOKEN_SECRET=aBBBCC');
