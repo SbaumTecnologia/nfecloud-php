@@ -15,7 +15,7 @@ Este pacote consiste em um SDK em PHP para a utilizacao do sistema SNFe através
 Via Composer
 
 ```bash
-composer require sbaum-tecnologia/nfecloud-php
+composer require sbaum-tecnologia/snfe-php
 ```
 
 ## Licença
@@ -27,16 +27,16 @@ require __DIR__.'/../vendor/autoload.php';
 
 // Coloca o Token SNFe  no environment do PHP.
 
-putenv('NFECLOUD_TOKEN=AAAA');
-putenv('NFECLOUD_TOKEN_SECRET=aBBBCC');
+putenv('SNFE_TOKEN=AAAA');
+putenv('SNFE_TOKEN_SECRET=aBBBCC');
 
 
 // Cria Objetos de Consulta/Servico
  
 
-$ServiceEmpresas = new NFeCloud\Empresas();
-$ServiceNotas = new NFeCloud\Notas();
-$ServiceActions = new NFeCloud\Actions();
+$ServiceEmpresas = new SNFe\Empresas();
+$ServiceNotas = new SNFe\Notas();
+$ServiceActions = new SNFe\Actions();
 
 
 $empresaNova = [
