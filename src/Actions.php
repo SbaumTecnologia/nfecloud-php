@@ -157,6 +157,33 @@ class Actions extends Resource
         return parent::post(null,'invoiceDownload',$data);
     }
     
+    public function createInvoiceDownloadAsync($params=array(),$xml=true,$pdf=true,$empresas_id=null){
+        if(is_null($empresas_id)){
+            throw new \Exception('Informe a empresa');
+        }
+        $data = $params;
+        $data['empresas_id'] = $empresas_id;
+        $data['xml'] = '0';
+        $data['pdf'] = '0';
+        if($xml){
+            $data['xml'] = '1';
+        }
+        if($pdf){
+            $data['pdf'] = '1';
+        }
+        return parent::post(null,'invoiceDownloadAsync',$data);
+    }
+    
+    public function statusInvoiceDownloadAsync($chave){
+        if(is_null($chave)){
+            throw new \Exception('Informe a chave do processo');
+        }
+        $data = array();
+        $data['chave'] = $chave;        
+        
+        return parent::post(null,'statusDownloadAsync',$data);
+    }
+    
 
     public function criarNota($data){
         return parent::post(null,'invoiceCreate',$data);
@@ -173,5 +200,37 @@ class Actions extends Resource
     public function dashboard($data){
         return parent::post(null,'dashboard',$data);
     }
+    
+    
+    public function waitForInvoiceDownloadAsync($chave,$maxSeconds = 300, $currentSecond = 0) {
+            
+                if($currentSecond>$maxSeconds){
+                    throw new \Exception("Tempo de estpera acima do limite - " . $maxSeconds . ' segundos');
+                }
+                if ($currentSecond == 0) {            
+                    $wait = 60;
+                } else {
+                    $wait = 30;
+                }        
+                
+                sleep($wait);
+                
+                $taskInfo = $this->statusInvoiceDownloadAsync($chave);
+                
+                
+                if ($taskInfo->retorno->status == "processing") {
+                    //repeating attempt
+                    return $this->waitForInvoiceDownloadAsync($chave,$maxSeconds, ($currentSecond+$wait));
+                    
+                }
+                if ($taskInfo->retorno->status == "finish") {
+                    return $taskInfo;           
+                }            
+            throw new \Exception("Erro desconhecido da api");
+        
+    }
+    
+    
+    
     
 }
