@@ -61,8 +61,8 @@ class ApiRequester
     {
         $this->lastResponse = $response;        
         $content = $response->getBody()->getContents();
-        var_dump($content);
-        exit;
+        //var_dump($content);
+        //exit;
         $local_data = json_decode($content); // parse as object
         if(property_exists ($local_data , "status" ) && $local_data->status=="fail"){            
             throw new \Exception("Erro da API (v1.0): " . $local_data->message);
