@@ -1,10 +1,10 @@
 ![alt text align:center](https://www.sbaum.com.br/images/logo-mini.png "Sbaum")
 
-# NFeCloud - SDK PHP
+# SNFe - SDK PHP
 
 
 ## Descrição
-Este pacote consiste em um SDK em PHP para a utilizacao do sistema NFeCLoud através de api - REST.
+Este pacote consiste em um SDK em PHP para a utilizacao do sistema SNFe através de api - REST.
 
 # Requisitos
 - PHP >=5.5.19;
@@ -15,7 +15,7 @@ Este pacote consiste em um SDK em PHP para a utilizacao do sistema NFeCLoud atra
 Via Composer
 
 ```bash
-composer require sbaum-tecnologia/nfecloud-php
+composer require sbaum-tecnologia/snfe-php
 ```
 
 ## Licença
@@ -25,18 +25,18 @@ GNU GPLv3. Por favor, veja o [Arquivo de Licença](license.txt) para mais inform
 ```php
 require __DIR__.'/../vendor/autoload.php';
 
-// Coloca o Token NFECLOUD  no environment do PHP.
+// Coloca o Token SNFe  no environment do PHP.
 
-putenv('NFECLOUD_TOKEN=AAAA');
-putenv('NFECLOUD_TOKEN_SECRET=aBBBCC');
+putenv('SNFE_TOKEN=AAAA');
+putenv('SNFE_TOKEN_SECRET=aBBBCC');
 
 
 // Cria Objetos de Consulta/Servico
  
 
-$ServiceEmpresas = new NFeCloud\Empresas();
-$ServiceNotas = new NFeCloud\Notas();
-$ServiceActions = new NFeCloud\Actions();
+$ServiceEmpresas = new SNFe\Empresas();
+$ServiceNotas = new SNFe\Notas();
+$ServiceActions = new SNFe\Actions();
 
 
 $empresaNova = [
