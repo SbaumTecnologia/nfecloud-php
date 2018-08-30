@@ -10,10 +10,12 @@ class Client extends Guzzle
     /**
      * Client constructor.
      */
+    
+   
+    
     public function __construct(array $config = [])
     {
-        
-
+               
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 
         $config = array_merge([
@@ -28,4 +30,8 @@ class Client extends Guzzle
 
         parent::__construct($config);
     }
+    
+    
+    
+    
 }

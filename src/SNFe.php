@@ -14,7 +14,7 @@ class SNFe
      * The base URL for the NFeCloud API.
      * @var string
      */
-    public static $apiBase = 'https://app.snfe.com.br/v1/';
+    public static $apiBase = 'https://dev.snfe.com.br/v1/';
 
     /**
      * The Environment variable name for API Key.

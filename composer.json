@@ -1,12 +1,12 @@
 {
-	"name" : "sbaum-tecnologia/nfecloud-php",
-	"description" : "SDK nfecloud para PHP.",
+	"name" : "sbaum-tecnologia/snfe-php",
+	"description" : "SDK snfe para PHP.",
 	"keywords" : [
-		"nfecloud",
-		"nfecloud-php",
-		"nfecloud-php-sdk"
+		"snfe",
+		"snfe-php",
+		"snfe-php-sdk"
 	],
-	"homepage" : "https://github.com/nfecloud/nfecloud-php",
+	"homepage" : "https://github.com/snfe/snfe-php",
 	"license" : "GPL-3.0",
 	"authors" : [{
 			"name" : "Sbaum Tecnologia",

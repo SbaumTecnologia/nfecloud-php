@@ -42,13 +42,15 @@ class ApiRequester
     public function request($method, $endpoint, array $options = [])
     {
         $this->lastOptions = $options;
+        //$options['debug'] = true;
         try {
             $response = $this->client->request($method, $endpoint, $options);
         } catch (ClientException $e) {
             
             $response = $e->getResponse();
         }
-      
+        
+        
         return $this->response($response);
     }
 
