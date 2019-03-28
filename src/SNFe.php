@@ -14,7 +14,8 @@ class SNFe
      * The base URL for the NFeCloud API.
      * @var string
      */
-    public static $apiBase = 'https://dev.snfe.com.br/v1/';
+    //public static $apiBase = 'https://app.snfe.com.br/v1/';
+    
 
     /**
      * The Environment variable name for API Key.
@@ -22,6 +23,7 @@ class SNFe
      */
     public static $tokenEnvVar = 'SNFE_TOKEN';
     public static $tokenSecretEnvVar = 'SNFE_TOKEN_SECRET';
+    public static $snfeEnviroment = 'SNFE_ENV';
 
     /**
      * Get Vindi API Key from environment.
@@ -31,5 +33,14 @@ class SNFe
     {   
         return['token_id'=>getenv(static::$tokenEnvVar),'token_secret'=>getenv(static::$tokenSecretEnvVar)];
         
-    }    
+    }
+    
+    public static function getApiBase()
+    {
+        if(getenv(static::$snfeEnviroment)=="dev"){
+            return 'https://dev.snfe.com.br/v1/';
+        }
+        return 'https://app.snfe.com.br/v1/';        
+    }
+    
 }

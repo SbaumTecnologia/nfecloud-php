@@ -2,6 +2,8 @@
 
 namespace SNFe;
 
+use Web\Google\StaticMap;
+
 class Actions extends Resource
 {
         
@@ -51,6 +53,25 @@ class Actions extends Resource
         throw new \Exception($this->msg_NoAvaliable);
     }
 
+    
+    /**
+     * Gera Token de usuario (Não o Token de Conta.
+     *
+     * @param string    $usuario                  usuario (email).     *
+     * @param string    $senha                    senha do usuario     *
+     
+     * @return array[Status , token, message]
+     * token = array(token_id,token_secret)
+     */
+    public function consultarDFeSefaz($id){
+        if(!is_int($id)){
+            throw new \Exception('Informe a id da empresa');
+        }
+        return parent::post(null,'consultarDFeSefaz',['empresas_id'=>$id]);
+    }
+    
+    
+    
    
     
     /**
@@ -60,7 +81,7 @@ class Actions extends Resource
      
      * @return mixed
      */
-    public function consultarDFeSefaz($id){
+    public function consultarStatusSefaz($id){
         if(!is_int($id)){
             throw new \Exception('Informe a id da empresa');
         }        

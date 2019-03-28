@@ -19,7 +19,7 @@ class Client extends Guzzle
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 
         $config = array_merge([
-            'base_uri'        => SNFe::$apiBase,            
+            'base_uri'        => SNFe::getApiBase(),            
             'headers' => [
                 'Content-Type' => 'application/json',
                 'User-Agent'   => trim('SNFe-PHP/' . SNFe::$sdkVersion . "; {$host}"),
