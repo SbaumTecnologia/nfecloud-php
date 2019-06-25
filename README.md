@@ -1,4 +1,4 @@
-![alt text align:center](https://www.sbaum.com.br/images/logo-mini.png "Sbaum")
+![alt text align:center](https://app.nfecloud.com.br/include/img/nfecloud/logo-menor.png "NFeCloud")
 
 # SNFe - SDK PHP
 
