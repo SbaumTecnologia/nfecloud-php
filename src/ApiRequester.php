@@ -66,7 +66,7 @@ class ApiRequester
         
         $local_data = json_decode($content); // parse as object
         if(property_exists ($local_data , "status" ) && $local_data->status=="fail"){            
-            throw new \Exception("Erro da API (v1.0): " . $local_data->message);
+            throw new \Exception("Erro da API (v1.1): " . $local_data->message);
         }     
         return $local_data;
     }

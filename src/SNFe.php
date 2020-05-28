@@ -8,7 +8,7 @@ class SNFe
      * This Package SDK Version.
      * @var string
      */
-    public static $sdkVersion = '1.0.0';
+    public static $sdkVersion = '1.1.0';
 
     /**
      * The base URL for the NFeCloud API.
@@ -40,7 +40,7 @@ class SNFe
         if(getenv(static::$snfeEnviroment)=="dev"){
             return 'https://dev.snfe.com.br/v1/';
         }
-        return 'https://app.snfe.com.br/v1/';        
+        return 'https://api.snfe.com.br/v1/';        
     }
     
 }
